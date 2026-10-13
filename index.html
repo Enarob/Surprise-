@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>A Little Surprise for Atiya 💗</title>
+<meta name="theme-color" content="#ffe3ec">
+<style>
+:root{--blush:#ffd6e3;--peach:#ffe7d6;--cream:#fff8ef;--lav:#e6dcff;--gold:#c9a45c;--rose:#e0678f;--ink:#5a3a4a;--shadow:0 10px 30px rgba(224,103,143,.22)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;overflow:hidden}
+body{font-family:Georgia,'Times New Roman',serif;color:var(--ink);background:linear-gradient(160deg,var(--cream),var(--blush) 55%,var(--lav))}
+h1,h2{font-weight:normal;margin:.2em 0}
+h1{font-size:clamp(1.9rem,8vw,2.8rem)}h2{font-size:clamp(1.5rem,6.5vw,2.2rem)}
+.script{font-family:'Brush Script MT','Segoe Script','Snell Roundhand',cursive;color:var(--rose)}
+p{line-height:1.55;font-size:1.05rem;margin:.5em 0}
+.scene{position:fixed;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:max(20px,env(safe-area-inset-top)) 22px max(24px,env(safe-area-inset-bottom));overflow-y:auto;z-index:2}
+.scene.on{display:flex;animation:in .7s ease both}
+.scene>*{max-width:460px;width:100%}
+@keyframes in{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:none}}
+.btn{font:inherit;font-size:1.05rem;border:0;border-radius:999px;padding:14px 26px;min-height:48px;margin:12px 6px 0;color:#fff;background:linear-gradient(135deg,#f08aa9,var(--rose));box-shadow:var(--shadow);cursor:pointer;transition:transform .15s}
+.btn:active{transform:scale(.94)}
+.btn.alt{background:#fff;color:var(--rose);border:2px solid var(--blush)}
+.btn[hidden]{display:none}
+.card{background:rgba(255,255,255,.78);border-radius:24px;padding:20px 18px;box-shadow:var(--shadow);border:1px solid #fff}
+.gold{color:var(--gold)}
+.bar{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,#f6a6bf,var(--gold));z-index:9;transition:width .5s}
+.float{position:fixed;top:-40px;pointer-events:none;z-index:1;opacity:.75;animation:fall linear infinite}
+@keyframes fall{to{transform:translate(var(--dx),110vh) rotate(360deg)}}
+.pop{position:fixed;pointer-events:none;z-index:20;font-size:22px;animation:pop .9s ease-out forwards}
+@keyframes pop{to{transform:translate(var(--dx),-70px) scale(1.4);opacity:0}}
+/* gift */
+.gift{font-size:0;background:none;border:0;padding:10px;cursor:pointer;animation:bob 2s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-10px) rotate(2deg)}}
+.glow{filter:drop-shadow(0 0 14px #ffb6cd)}
+/* envelope */
+.env{position:relative;width:min(300px,80vw);height:200px;margin:20px auto 0;cursor:pointer;border:0;background:none;padding:0;font:inherit}
+.env .back{position:absolute;inset:0;background:#f6b9cb;border-radius:10px;box-shadow:var(--shadow)}
+.env .paper{position:absolute;left:10px;right:10px;top:10px;height:170px;background:var(--cream);border-radius:8px;padding:12px;font-size:.9rem;transition:transform .9s .35s ease,height .5s;overflow:hidden;color:var(--ink)}
+.env .front{position:absolute;inset:0;border-radius:10px;background:linear-gradient(135deg,#ffc4d6 50%,transparent 50%),linear-gradient(225deg,#ffb3ca 50%,transparent 50%);clip-path:polygon(0 0,50% 55%,100% 0,100% 100%,0 100%)}
+.env .flap{position:absolute;left:0;right:0;top:0;height:105px;background:#f29ab6;clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transition:transform .5s;z-index:3}
+.env .seal{position:absolute;left:50%;top:78px;transform:translateX(-50%);font-size:30px;z-index:4;transition:opacity .3s}
+.env.open .flap{transform:rotateX(180deg);z-index:0}
+.env.open .seal{opacity:0}
+.env.open .paper{transform:translateY(-95px);height:215px;z-index:2}
+.letter{margin-top:110px}
+/* choices */
+.opts{display:grid;gap:10px;margin-top:14px}
+.opt{font:inherit;font-size:1rem;padding:14px;border-radius:16px;border:2px solid var(--blush);background:#fff;color:var(--ink);min-height:48px;cursor:pointer}
+.opt:active{transform:scale(.97)}
+.opt.picked{border-color:var(--rose);background:#fff0f5}
+.fb{min-height:3.2em;color:var(--rose);font-weight:bold}
+.cards{display:grid;gap:12px;margin-top:10px}
+.pick{font:inherit;font-size:1.05rem;padding:16px;border-radius:20px;border:2px dashed var(--rose);background:rgba(255,255,255,.85);color:var(--ink);cursor:pointer;min-height:64px;transition:transform .3s}
+.pick.done{border-style:solid;background:#fff;animation:in .5s both}
+.names{font-size:clamp(2.4rem,13vw,3.8rem);line-height:1.1}
+.dates{letter-spacing:.12em;color:var(--gold);font-size:.95rem;text-transform:uppercase}
+.heart{font-size:90px;background:none;border:0;cursor:pointer;line-height:1;transition:transform .2s}
+.heart:active{transform:scale(.85)}
+.conf{position:fixed;top:-20px;width:10px;height:14px;z-index:15;pointer-events:none;animation:fall linear forwards}
+.dots{font-size:.85rem;color:var(--gold);margin-top:8px}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important;animation-iteration-count:1!important;transition-duration:.01s!important}.float,.conf{display:none}}
+</style>
+</head>
+<body>
+<div class="bar" id="bar" style="width:0"></div>
+
+<!-- 1 Mystery -->
+<section class="scene on" aria-label="Surprise box">
+  <h1 class="script">Hey Atiya! 💗</h1>
+  <p>Someone has a little surprise for you…<br><small>(Shhh, naam nahi bataungi 🤫)</small></p>
+  <button class="gift glow" id="giftBtn" aria-label="Open the surprise box">
+    <svg width="170" height="170" viewBox="0 0 100 100" aria-hidden="true"><rect x="14" y="42" width="72" height="46" rx="6" fill="#f6a6bf"/><rect x="10" y="30" width="80" height="18" rx="6" fill="#ffc4d6"/><rect x="45" y="30" width="10" height="58" fill="#c9a45c"/><path d="M50 30C40 10 22 16 32 28 38 32 46 30 50 30ZM50 30C60 10 78 16 68 28 62 32 54 30 50 30Z" fill="#e0678f"/></svg>
+  </button>
+  <p class="gold">Tap the box ✨</p>
+</section>
+
+<!-- 2 Little message -->
+<section class="scene" aria-label="A little message">
+  <div class="card">
+    <h2>Atiya, surprise time! 💗</h2>
+    <div id="lines" aria-live="polite"></div>
+    <button class="btn" id="lineBtn">Acha, phir? 👀</button>
+  </div>
+</section>
+
+<!-- 3 Letter -->
+<section class="scene" aria-label="Your letter">
+  <h2>Ek chhota sa letter 💌</h2>
+  <button class="env" id="env" aria-label="Open the letter">
+    <div class="back"></div>
+    <div class="paper"><b class="script" style="font-size:1.5rem">Dear Atiya,</b><br>Aap ke liye dil se kuch alfaaz… 💗</div>
+    <div class="front"></div><div class="flap"></div><div class="seal">💗</div>
+  </button>
+  <div class="card letter" id="letterTxt" hidden>
+    <p>Dear Atiya,</p>
+    <p>Shaadi ka mausam aa gaya hai, aur khushi ki khabar sunke dil khush ho gaya. 🌸</p>
+    <p>Yeh chhota sa surprise sirf aap aur Ramzan ke liye hai, ek dost ki taraf se, bohot saari dua ke saath.</p>
+    <p class="script" style="font-size:1.4rem">— Aap ki anonymous dost 🤍</p>
+  </div>
+  <p class="gold" id="envHint">Envelope ko tap karein ✨</p>
+  <button class="btn" id="letterNext" hidden>Aage chalein 💍</button>
+</section>
+
+<!-- 4 Wedding surprise -->
+<section class="scene" aria-label="Wedding surprise">
+  <div id="heartBox">
+    <h2>Dil ko 3 baar tap karein 💕</h2>
+    <button class="heart" id="heart" aria-label="Tap the heart">💗</button>
+    <p class="dots" id="heartCount">0 / 3</p>
+  </div>
+  <div id="reveal" hidden>
+    <svg width="130" height="60" viewBox="0 0 130 60" aria-hidden="true"><circle cx="48" cy="34" r="20" fill="none" stroke="#c9a45c" stroke-width="5"/><circle cx="82" cy="34" r="20" fill="none" stroke="#e0b9c6" stroke-width="5"/><path d="M48 6l5 6h-10z" fill="#e0678f"/></svg>
+    <p>Presenting…</p>
+    <div class="names script">Atiya<br><span style="font-size:.5em" class="gold">&amp;</span><br>Ramzan</div>
+    <p class="dates">6 · 7 · 8 November 2026</p>
+    <p>Shaadi mubarak! 🌸🎉</p>
+    <button class="btn" data-next>Ab thoda fun? 😜</button>
+  </div>
+</section>
+
+<!-- 5 Quiz -->
+<section class="scene" aria-label="Tiny quiz">
+  <div class="card">
+    <h2>Tiny Shaadi Quiz 📝</h2>
+    <p class="dots" id="qNum"></p>
+    <p id="qText"></p>
+    <div class="opts" id="qOpts"></div>
+    <p class="fb" id="qFb" aria-live="polite"></p>
+    <button class="btn" id="qNext" hidden>Next ➜</button>
+  </div>
+</section>
+
+<!-- 6 Choose -->
+<section class="scene" aria-label="Choose your surprise">
+  <h2>Apna surprise chunein 🎁</h2>
+  <p>Teen mein se kuch bhi kholein (sab khol sakti hain 😉)</p>
+  <div class="cards" id="picks"></div>
+  <button class="btn" id="pickNext" hidden>Aage ➜</button>
+</section>
+
+<!-- 7 Wish -->
+<section class="scene" aria-label="A special wish">
+  <div class="card">
+    <h2>A Special Wish 🤲</h2>
+    <p>Atiya &amp; Ramzan, aap dono ko shaadi bohot bohot mubarak!</p>
+    <p>Aap dono ki life khushiyon aur beautiful memories se bhar jaye. Allah aap ke rishte mein pyaar, sukoon aur barakat de.</p>
+    <p>May your new journey be full of love, laughter, and endless happiness.</p>
+    <button class="btn" id="ameen">Ameen 🤍</button>
+    <button class="btn" id="wishNext" hidden>Last surprise ✨</button>
+  </div>
+</section>
+
+<!-- 8 Ending -->
+<section class="scene" aria-label="The end">
+  <p class="dates">Shaadi Mubarak</p>
+  <div class="names script">Atiya<br><span style="font-size:.5em" class="gold">&amp;</span><br>Ramzan</div>
+  <p>Wishing you both a lifetime of happiness, laughter, love, and beautiful memories. 💍✨</p>
+  <p class="dates">6 · 7 · 8 November 2026</p>
+  <button class="btn" id="boom">More confetti 🎊</button>
+  <button class="btn alt" id="again">Replay 🔁</button>
+</section>
+
+<script>
+(function(){
+var $=function(s){return document.querySelector(s)};
+var scenes=[].slice.call(document.querySelectorAll('.scene')),cur=0;
+var still=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+function go(n){scenes[cur].classList.remove('on');cur=n;scenes[n].classList.add('on');scenes[n].scrollTop=0;
+  $('#bar').style.width=(n/(scenes.length-1)*100)+'%';if(n==scenes.length-1)confetti(45);}
+[].forEach.call(document.querySelectorAll('[data-next]'),function(b){b.onclick=function(){go(cur+1)}});
+
+/* floating hearts & petals */
+if(!still){var em=['💗','🌸','✨','🤍','🌷'];for(var i=0;i<12;i++){var f=document.createElement('div');f.className='float';f.textContent=em[i%5];
+  f.style.cssText='left:'+Math.random()*100+'vw;font-size:'+(14+Math.random()*14)+'px;animation-duration:'+(9+Math.random()*9)+'s;animation-delay:-'+Math.random()*14+'s;--dx:'+(Math.random()*80-40)+'px';document.body.appendChild(f);}}
+/* tap sparkles */
+document.addEventListener('pointerdown',function(e){if(still)return;var p=document.createElement('div');p.className='pop';
+  p.textContent=['💗','✨','🌸'][Math.floor(Math.random()*3)];p.style.left=(e.clientX-10)+'px';p.style.top=(e.clientY-10)+'px';
+  p.style.setProperty('--dx',(Math.random()*60-30)+'px');document.body.appendChild(p);setTimeout(function(){p.remove()},900);});
+function confetti(n){if(still)return;var c=['#f6a6bf','#c9a45c','#e6dcff','#ffd6e3','#ffb38a','#e0678f'];
+  for(var i=0;i<n;i++){var d=document.createElement('div');d.className='conf';d.style.left=Math.random()*100+'vw';d.style.background=c[i%6];
+    d.style.animationDuration=(2.5+Math.random()*2.5)+'s';d.style.animationDelay=Math.random()*.8+'s';d.style.setProperty('--dx',(Math.random()*120-60)+'px');
+    document.body.appendChild(d);(function(x){setTimeout(function(){x.remove()},6500)})(d);}}
+
+/* 1 gift */
+$('#giftBtn').onclick=function(){go(1)};
+
+/* 2 lines */
+var L=['Aaj ka din bohot special hai… ✨','Kyunke ek dost ko pata chala ke shaadi ki taiyariyan shuru ho chuki hain! 🎊','Aur usne socha: “Sirf message nahi, ek chhota sa surprise bhejti hoon.” 😌','Toh chalein, aap ke liye kuch pyari cheezein ready hain 💗'];
+var li=0,lb=$('#lineBtn'),lw=$('#lines');
+function addLine(){var p=document.createElement('p');p.textContent=L[li];p.style.animation='in .6s both';lw.appendChild(p);li++;
+  lb.textContent=li<L.length?['Acha, phir? 👀','Aur? 😏','Ohooo… 🙈'][li-1]||'Aur? 😏':'Letter dikhao 💌';}
+addLine();
+lb.onclick=function(){if(li<L.length)addLine();else go(2)};
+
+/* 3 letter */
+var env=$('#env');
+env.onclick=function(){if(env.classList.contains('open'))return;env.classList.add('open');$('#envHint').hidden=true;
+  setTimeout(function(){env.style.display='none';$('#letterTxt').hidden=false;$('#letterNext').hidden=false;},1400);};
+$('#letterNext').onclick=function(){go(3)};
+
+/* 4 hearts */
+var hc=0;$('#heart').onclick=function(){hc++;this.style.transform='scale('+(1+hc*.15)+')';$('#heartCount').textContent=hc+' / 3';confetti(6);
+  if(hc>=3){setTimeout(function(){$('#heartBox').hidden=true;$('#reveal').hidden=false;confetti(30);},350);}};
+
+/* 5 quiz */
+var Q=[
+ {q:'Shaadi ki taiyari mein sab se important cheez kya hai?',o:[['Perfect outfit 👗','Outfit ready, to aadhi jung jeet li! 😎'],['Mehndi ka design 🌿','Design jitna beautiful, rang utna gehra! 🤎'],['Khana 😋','Sahi pakra! Guests ki yehi dua hoti hai 😂']]},
+ {q:'Photoshoot ke time aap kaun si hain?',o:[['Shy smile 🙈','Cute! Camera bhi sharma gaya 📸'],['Full filmy pose 🎬','Director sahiba ready hain! 🎥'],['“Bas jaldi khatam karo” 😅','Haha, par photos phir bhi stunning aayengi ✨']]},
+ {q:'Shaadi ke din sab se zyada emotional kaun hoga?',o:[['Sab log ek saath 😭','Tissues ka stock ready rakhein 🤧'],['Wo jise makeup kharab hone ka dar hai 💄','Waterproof makeup ki dua karein 😄'],['Koi nahi, sab khush hain! 😄','Khushi ke aansoo phir bhi allowed hain 🥹']]}
+];
+var qi=0,answered=false;
+function showQ(){var q=Q[qi];answered=false;$('#qNum').textContent='Question '+(qi+1)+' / '+Q.length;$('#qText').textContent=q.q;$('#qFb').textContent='';$('#qNext').hidden=true;
+  var w=$('#qOpts');w.innerHTML='';q.o.forEach(function(o){var b=document.createElement('button');b.className='opt';b.textContent=o[0];
+    b.onclick=function(){if(answered)return;answered=true;b.classList.add('picked');$('#qFb').textContent=o[1];$('#qNext').hidden=false;
+      $('#qNext').textContent=qi<Q.length-1?'Next ➜':'Done! 🎉';confetti(8);};w.appendChild(b);});}
+$('#qNext').onclick=function(){if(qi<Q.length-1){qi++;showQ();}else go(5)};showQ();
+
+/* 6 picks */
+var P=[['🎀 Cute wish','Ramzan ko bolna: “Meri dost ko hamesha khush rakhna!” 😄 (Ye order hai, request nahi!)'],
+ ['😂 Funny wish','Shaadi ke baad bhi remote ki jung chalti rahegi… par pyaar jeetega! 📺💗'],
+ ['🌹 Sweet wish','Aap dono ki kahani mein sirf pyaar, sukoon aur muskurahatein hon. 🌹']];
+var opened=0;P.forEach(function(p){var b=document.createElement('button');b.className='pick';b.textContent=p[0];
+  b.onclick=function(){if(b.classList.contains('done'))return;b.classList.add('done');b.textContent=p[1];opened++;confetti(10);$('#pickNext').hidden=false;};
+  $('#picks').appendChild(b);});
+$('#pickNext').onclick=function(){go(6)};
+
+/* 7 wish */
+$('#ameen').onclick=function(){this.hidden=true;$('#wishNext').hidden=false;confetti(25);};
+$('#wishNext').onclick=function(){go(7)};
+
+/* 8 end */
+$('#boom').onclick=function(){confetti(50)};
+$('#again').onclick=function(){location.reload()};
+})();
+</script>
+</body>
+</html>
